@@ -6,5 +6,7 @@ defmodule SportScore.User do
     field :email, :string
     field :encrypted_password, :string
     field :is_admin, :boolean, default: false
+
+    timestamps
   end
 end
