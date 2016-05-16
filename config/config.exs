@@ -27,3 +27,14 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :addict,
+  secret_key:  System.get_env("ADDICT_KEY"),
+  extra_validation: fn ({valid, errors}, user_params) -> {valid, errors} end, # define extra validation here
+  user_schema: SportScore.User,
+  repo: SportScore.Repo,
+  from_email: System.get_env("SPORTSCOREFROM"),
+  mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
+  mailgun_key: System.get_env("MAILGUN_KEY"),
+  mail_service: :mailgun,
+  post_login: &SportScore.PostLoginAction.set_session/3
