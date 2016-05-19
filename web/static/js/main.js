@@ -1,6 +1,8 @@
 var Vue = require('vue')
 var VueRouter = require('vue-router')
-Vue.use(VueRouter)
+var VueResource = require('vue-resource')
+
+Vue.use(VueRouter, VueResource)
 var About =  require("./vue/components/general/about.vue")
 
 var App = Vue.extend({
