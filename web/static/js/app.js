@@ -14,6 +14,7 @@
 import "phoenix_html"
 import "vue"
 import "vue-router"
+import "vue-resource"
 import "./main.js"
 
 // Import local files
