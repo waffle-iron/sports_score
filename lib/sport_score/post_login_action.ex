@@ -15,8 +15,9 @@ defmodule SportScore.PostLoginAction do
     conne
     |> fetch_flash(:info)
     |> put_flash(:info, "Welome back, #{current_user.username}")
-    |> redirect(to: Helpers.page_path(conn, :index))
-    |> halt()
+    |> put_session(:current_user, current_user)
+    
+    conne 
   end
 
   def set_session(conn, :error, errors) do
