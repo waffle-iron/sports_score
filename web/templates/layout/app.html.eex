@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,61 +9,67 @@
 
     <title>Hello SportScore!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
+</head>
 
-  <body id="sportscore">
+<body id="sportscore">
     <nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a v-link="{ path: '/' }" class="navbar-brand">ERB Voting</a>
-        </div>
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a v-link="{ path: '/' }" class="navbar-brand">SportScore</a>
+            </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li v-link="{ path: '/battles' }" class="btn">
-                    <a>The Battles</a>
-                </li>
-                <li v-link="{ path: '/contestants'}" class="btn">
-                    <a >The Contestants</a>
-                </li>
-                <li v-link="{ path: '/teams' }" class="btn">
-                    <a>The Teams</a>
-                </li>
-                <li v-link="{ path: '/about' }" class="btn">
-                    <a>About</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <%= if Map.fetch(@conn, :current_user) != :error do %>
-                <h5> Welcome, <%=  @current_user.name %>!
-                    <!-- <img src="<%= @current_user.image %>" class="img-circle"/>-->
-                    <%= link "Logout", to: logout_path(@conn, :delete), method: :post, class: "btn btn-sm btn-danger" %></h5>
-                <% else %>
-                <li>
-                    <%= link "Login", to: login_path(@conn, :login) %> / <%= link "Register", to: register_path(@conn, :register) %>
-                </li>
-                <% end %>
-            </ul>
-        </div>
-    </div>
-</nav>
-    <div class="container-fluid">
-        <p class="alert alert-info alert-dismissible" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="alert alert-danger alert-dismissible" role="alert"><%= get_flash(@conn, :error) %></p>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li v-link="{ path: '/battles' }" class="btn">
+                        <a>The Battles</a>
+                    </li>
+                    <li v-link="{ path: '/contestants'}" class="btn">
+                        <a >The Contestants</a>
+                    </li>
+                    <li v-link="{ path: '/teams' }" class="btn">
+                        <a>The Teams</a>
+                    </li>
+                    <li v-link="{ path: '/about' }" class="btn">
+                        <a>About</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <%= if !is_nil(@current_user) && Map.fetch(@current_user, :username) != :error do %>
+                    <h5> Welcome, <%=  @current_user.username %>!                
+                        <%= link "Logout", to: logout_path(@conn, :logout), method: :post, class: "btn btn-sm btn-danger" %></h5>
+                        <% else %>
+                        <li>
+                            <ul class="list-unstyled list-inline">
+                                <li><%= link "Login", to: login_path(@conn, :login), class: "btn" %> </li>
+                                <li><%= link "Register", to: register_path(@conn, :register), class: "btn" %></li>
+                            </ul>                            
+                        </li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <p class="alert alert-info alert-dismissible" role="alert"><%= get_flash(@conn, :info) %></p>
+            <p class="alert alert-danger alert-dismissible" role="alert"><%= get_flash(@conn, :error) %></p>
 
-        <main role="main">
-            <router-view
-                    keep-alive>
-            </router-view>
-        </main>
-    </div > <!-- /container --><!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-  </body>
+            <main role="main">
+                <router-view keep-alive></router-view>
+            </main>
+        </div > <!-- /container --><!-- /container -->
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+</body>
 </html>
