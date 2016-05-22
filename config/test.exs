@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :sport_score, SportScore.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("DATABASE_POSTGRESQL_USERNAME") || "mackbook",
+  password: System.get_env("DATABASE_POSTGRESQL_PASSWORD") || "",  
   database: "sport_score_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
