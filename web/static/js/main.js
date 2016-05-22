@@ -3,7 +3,7 @@ var VueRouter = require('vue-router')
 var VueResource = require('vue-resource')
 
 Vue.use(VueRouter, VueResource)
-var About =  require("./vue/components/general/about.vue")
+
 
 var App = Vue.extend({
 })
@@ -16,12 +16,22 @@ var router = new VueRouter({
     linkActiveClass: 'disabled'
 })
 
+
+//The components
+var About 	=  	require("./vue/components/general/about.vue")
+var Home 	=	require("./vue/components/general/home.vue")
+
+
+
 // Define some routes.
 // Each route should map to a component. The "component" can
 // either be an actual component constructor created via
 // Vue.extend(), or just a component options object.
 // We'll talk about nested routes later.
 router.map({
+	'/': {
+		component: Home
+	},
     '/about': {
         component: About
     },
