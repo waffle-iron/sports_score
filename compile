@@ -1,1 +1,2 @@
 ENV=production node_modules/.bin/webpack
+mix phoenix.digest
