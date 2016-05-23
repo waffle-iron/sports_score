@@ -34,6 +34,6 @@ config :addict,
   user_schema: SportScore.User,
   repo: SportScore.Repo,
   from_email: System.get_env("SPORTSCOREFROM"),
-  mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
-  mailgun_key: System.get_env("MAILGUN_KEY"),
+  mailgun_domain: "https://api.mailgun.net/v3/samples.mailgun.org/",
+  mailgun_key: "key-3ax6xnjp29jd6fds4gc373sgvjxteol0",
   mail_service: :mailgun
