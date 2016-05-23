@@ -19,10 +19,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
-
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,
@@ -34,6 +30,10 @@ config :addict,
   user_schema: SportScore.User,
   repo: SportScore.Repo,
   from_email: System.get_env("SPORTSCOREFROM"),
-  mailgun_domain: "https://api.mailgun.net/v3/samples.mailgun.org/",
-  mailgun_key: "key-3ax6xnjp29jd6fds4gc373sgvjxteol0",
+  mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
+  mailgun_key: System.get_env("MAILGUN_KEY"),
   mail_service: :mailgun
+
+# Import environment specific config. This must remain at the bottom
+# of this file so it overrides the configuration defined above.
+import_config "#{Mix.env}.exs"
