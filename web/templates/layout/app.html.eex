@@ -27,18 +27,12 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li v-link="{ path: '/battles' }" class="btn">
-                        <a>The Battles</a>
+                    <li v-link="{ path: '/upcoming' }" class="btn">
+                        <a>Upcoming Events</a>
                     </li>
-                    <li v-link="{ path: '/contestants'}" class="btn">
-                        <a >The Contestants</a>
-                    </li>
-                    <li v-link="{ path: '/teams' }" class="btn">
-                        <a>The Teams</a>
-                    </li>
-                    <li v-link="{ path: '/about' }" class="btn">
-                        <a>About</a>
-                    </li>
+                    <li v-link="{ path: '/myevents'}" class="btn">
+                        <a >My Events</a>
+                    </li>                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <% current_user =  current_user(@conn)%>
