@@ -32,8 +32,7 @@ config :addict,
   from_email: System.get_env("SPORTSCOREFROM"),
   mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
   mailgun_key: System.get_env("MAILGUN_KEY"),
-  mail_service: :mailgun,
-  post_login: &SportScore.PostLoginAction.set_session/3
+  mail_service: :mailgun
 
 
 # Import environment specific config. This must remain at the bottom
