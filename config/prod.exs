@@ -28,17 +28,6 @@ config :sport_score, SportScore.Repo,
   pool_size: 20,
   ssl: true
 
-
-config :addict,
-  secret_key:  System.get_env("ADDICT_KEY"),
-  extra_validation: fn ({valid, errors}, user_params) -> {valid, errors} end, # define extra validation here
-  user_schema: SportScore.User,
-  repo: SportScore.Repo,
-  from_email: System.get_env("SPORTSCOREFROM"),
-  mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
-  mailgun_key: System.get_env("MAILGUN_KEY"),
-  mail_service: :mailgun
-
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
