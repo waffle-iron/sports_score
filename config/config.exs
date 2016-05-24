@@ -24,16 +24,6 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
 
-config :addict,
-  secret_key:  System.get_env("ADDICT_KEY"),
-  extra_validation: fn ({valid, errors}, user_params) -> {valid, errors} end, # define extra validation here
-  user_schema: SportScore.User,
-  repo: SportScore.Repo,
-  from_email: System.get_env("SPORTSCOREFROM"),
-  mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
-  mailgun_key: System.get_env("MAILGUN_KEY"),
-  mail_service: :mailgun
-
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
