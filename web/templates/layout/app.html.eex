@@ -25,6 +25,7 @@
                 <a v-link="{ path: '/' }" class="navbar-brand">SportScore</a>
             </div>
 
+            <% current_user =  current_user(@conn) %>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li v-link="{ path: '/upcoming' }" class="btn">
@@ -32,10 +33,12 @@
                     </li>
                     <li v-link="{ path: '/myevents'}" class="btn">
                         <a >My Events</a>
+                    </li>
+                    <li v-link="{ path: '/sports'}" class="btn">
+                        <a >Sports</a>
                     </li>                    
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <% current_user =  current_user(@conn)%>
+                <ul class="nav navbar-nav navbar-right">                    
                     <%= if current_user  do %>
                     <h5> Welcome, <%=  current_user.name %>!                
                         <%= link "Logout", to: logout_path(@conn, :logout), method: :post, class: "btn btn-sm btn-danger" %></h5>

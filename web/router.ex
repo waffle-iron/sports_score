@@ -14,6 +14,10 @@ defmodule SportScore.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :secure do
+    plug Addict.Plugs.Authenticated
+  end
+
   scope "/" do
     addict :routes
   end
@@ -22,6 +26,14 @@ defmodule SportScore.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+  end
+
+  scope "/api", SportScore do
+    pipe_through :api    
+
+    scope "/private", SportScore do
+      pipe_through :secure
+    end
   end
 
   # Other scopes may use custom stacks.
