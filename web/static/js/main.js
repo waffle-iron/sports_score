@@ -1,6 +1,7 @@
 var Vue = require('vue')
 var VueRouter = require('vue-router')
 var VueResource = require('vue-resource')
+var BaseComponentPath = "./vue/components/";
 
 Vue.use(VueRouter, VueResource)
 
@@ -18,8 +19,16 @@ var router = new VueRouter({
 
 
 //The components
-var About 	=  	require("./vue/components/general/about.vue")
-var Home 	=	require("./vue/components/general/home.vue")
+var About 	=  	require(BaseComponentPath + "general/about.vue")
+var Home 	=	require( BaseComponentPath + "general/home.vue")
+var Sports = require(BaseComponentPath + "sports/home.vue")
+
+
+
+//Sports
+var SportsList = require(BaseComponentPath + "sports/list.vue")
+var SportsNew = require(BaseComponentPath + "sports/new.vue")
+
 
 
 
@@ -32,9 +41,29 @@ router.map({
 	'/': {
 		component: Home
 	},
-    '/about': {
-        component: About
-    },
+  '/about': {
+      component: About
+  },
+  '/sports':{
+      component : Sports,
+      subRoutes: {
+        '/': {
+          component: SportsList
+        },
+        '/new': {
+          component: SportsNew
+        }
+      /*'/bar': {
+        // Bar will be rendered inside Foo's <router-view>
+        // when /foo/bar is matched
+        component: Bar
+      },
+      '/baz': {
+        // Same for Baz, but only when /foo/baz is matched
+        component: Baz
+      }*/
+    }
+  }
 })
 
 router.beforeEach(function () {

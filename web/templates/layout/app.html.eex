@@ -31,23 +31,25 @@
                     <li v-link="{ path: '/upcoming' }" class="btn">
                         <a>Upcoming Events</a>
                     </li>
-                    <li v-link="{ path: '/myevents'}" class="btn">
-                        <a >My Events</a>
-                    </li>
-                    <li v-link="{ path: '/sports'}" class="btn">
-                        <a >Sports</a>
-                    </li>                    
-                </ul>
-                <ul class="nav navbar-nav navbar-right">                    
                     <%= if current_user  do %>
-                    <h5> Welcome, <%=  current_user.name %>!                
+                      <li v-link="{ path: '/myevents'}" class="btn">
+                          <a >My Events</a>
+                      </li>
+                    <% end %>
+                      <li v-link="{ path: '/sports'}" class="btn">
+                          <a >Sports</a>
+                      </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <%= if current_user  do %>
+                    <h5> Welcome, <%=  current_user.name %>!
                         <%= link "Logout", to: logout_path(@conn, :logout), method: :post, class: "btn btn-sm btn-danger" %></h5>
                         <% else %>
                         <li>
                             <ul class="list-unstyled list-inline">
                                 <li><%= link "Login", to: login_path(@conn, :login), class: "btn" %> </li>
                                 <li><%= link "Register", to: register_path(@conn, :register), class: "btn" %></li>
-                            </ul>                            
+                            </ul>
                         </li>
                         <% end %>
                     </ul>
@@ -68,5 +70,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+<script src="<%= static_path(@conn, "/js/main.js") %>"></script>
 </body>
 </html>
