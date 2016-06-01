@@ -8,6 +8,15 @@ defmodule SportScore.SportController do
 
   def index(conn, _params) do
     sports = Repo.all(Sport)
+    sports = [
+      %{id: 1 , name: "LOOL" , user_id: 3},
+      %{id: 1 , name: "LOOL" , user_id: 3},
+      %{id: 1 , name: "LOOL" , user_id: 3},
+      %{id: 1 , name: "LOOL" , user_id: 3},
+      %{id: 1 , name: "LOOL" , user_id: 3},
+      %{id: 1 , name: "LOOL" , user_id: 3},
+      %{id: 1 , name: "LOOL" , user_id: 3}
+    ]
     render(conn, "index.json", sports: sports)
   end
 
