@@ -1,9 +1,9 @@
 var Vue = require('vue')
 var VueRouter = require('vue-router')
-var VueResource = require('vue-resource')
 var BaseComponentPath = "./vue/components/";
 
-Vue.use(VueRouter, VueResource)
+Vue.use(VueRouter)
+Vue.use(require('vue-resource'))
 
 
 var App = Vue.extend({
