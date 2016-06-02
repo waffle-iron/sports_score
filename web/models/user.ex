@@ -12,7 +12,7 @@ defmodule SportScore.User do
 
   def changeset(model, params \\ :empty) do
   	model
-  	|> cast(params, ~w(name email), [])
+  	|> cast(params, ~w(name email encrypted_password), [])
   	|> validate_length(:name, min: 3)
     |> unique_constraint(:name,  message: "This name is already being used")
     |> unique_constraint(:email,  message: "This enail is already being used")
