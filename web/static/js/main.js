@@ -5,7 +5,6 @@ var BaseComponentPath = "./vue/components/";
 Vue.use(VueRouter)
 Vue.use(require('vue-resource'))
 
-
 var App = Vue.extend({
 })
 
@@ -28,6 +27,7 @@ var Sports = require(BaseComponentPath + "sports/home.vue")
 //Sports
 var SportsList = require(BaseComponentPath + "sports/list.vue")
 var SportsNew = require(BaseComponentPath + "sports/new.vue")
+var SportsShow = require(BaseComponentPath + "sports/show.vue")
 
 
 
@@ -52,16 +52,11 @@ router.map({
         },
         '/new': {
           component: SportsNew
+        },
+        '/:id': {
+          name: 'sport',
+          component : SportsShow
         }
-      /*'/bar': {
-        // Bar will be rendered inside Foo's <router-view>
-        // when /foo/bar is matched
-        component: Bar
-      },
-      '/baz': {
-        // Same for Baz, but only when /foo/baz is matched
-        component: Baz
-      }*/
     }
   }
 })
