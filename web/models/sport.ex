@@ -29,9 +29,7 @@ defmodule SportScore.Sport do
 
   defp normalize_name(changeset) do
     if name = get_change(changeset, :name) do
-        normalized_name =
-            Regex.replace(~r/[^\w]/iu, name, "")
-            |> String.downcase
+        normalized_name = Normalize.normalize(name)
         put_change(changeset, :name_system, normalized_name)
     else
         changeset
