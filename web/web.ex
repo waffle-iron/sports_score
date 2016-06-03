@@ -20,6 +20,8 @@ defmodule SportScore.Web do
     quote do
       use Ecto.Schema
 
+      alias SportScore.Normalize
+
       import Ecto
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]
@@ -31,6 +33,7 @@ defmodule SportScore.Web do
       use Phoenix.Controller
 
       alias SportScore.Repo
+      alias SportScore.Normalize
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
 
