@@ -7,23 +7,26 @@ defmodule SportScore.SportController do
   plug Addict.Plugs.Authenticated when action in [:create, :update, :delete]
 
   def index(conn, _params) do
-    sports = Repo.all(Sport)
-    sports = [
-      %{id: 1 , name: "LOOL" , user_id: 3},
-      %{id: 1 , name: "LOOL" , user_id: 3},
-      %{id: 1 , name: "LOOL" , user_id: 3},
-      %{id: 1 , name: "LOOL" , user_id: 3},
-      %{id: 1 , name: "LOOL" , user_id: 3},
-      %{id: 1 , name: "LOOL" , user_id: 3},
-      %{id: 1 , name: "LOOL" , user_id: 3}
-    ]
+    query = from s in Sport,
+    order_by: [asc: s.name]
+    sports = Repo.all(query)
+    render(conn, "index.json", sports: sports)
+  end
+
+  def search(conn, %{"term" => term} = params) do
+    normalized_term =  "%" <> Normalize.normalize(term) <> "%"
+    query = from s in Sport,
+    where: ilike(s.name_system, ^normalized_term),
+    order_by: [asc: s.name]
+
+    sports = Repo.all(query)
     render(conn, "index.json", sports: sports)
   end
 
   def create(conn, %{"sport" => sport_params}) do
     current_user = Addict.Helper.current_user(conn)
-    changeset = Sport.changeset(%Sport{}, sport_params)
-    Ecto.Changeset.put_change(changeset, :user_id, current_user.id)
+    sport = Map.put(sport_params, "user_id", current_user.id)
+    changeset = Sport.changeset(%Sport{}, sport)
 
     case Repo.insert(changeset) do
       {:ok, sport} ->
