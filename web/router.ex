@@ -28,6 +28,7 @@ defmodule SportScore.Router do
     pipe_through :api
     get "/logged_in", PageController, :logged_in
     resources "/sports", SportController, except: [:new, :edit]
+    post "/sports/search", SportController, :search
   end
 
   # Other scopes may use custom stacks.
