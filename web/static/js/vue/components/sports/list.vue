@@ -21,7 +21,7 @@
               <a v-link="{ name: 'sport', params: { id: sport.id }}">{{sport.name}}</a>
             </td>
             <td>
-              
+              {{sport.user.name}}
             </td>
           </tr>
         </table>
@@ -70,7 +70,7 @@ export default{
       }
     },
 
-    getCurrentUser: funciton(){
+    getCurrentUser: function(){
       this.$http.get('/api/logged_in').then(function(data){
         this.currentUser = parseInt(data.data.id)
       }, function(error){

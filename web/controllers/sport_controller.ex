@@ -2,20 +2,27 @@ defmodule SportScore.SportController do
   use SportScore.Web, :controller
 
   alias SportScore.Sport
+  alias SportScore.User
 
   plug :scrub_params, "sport" when action in [:create, :update]
   plug Addict.Plugs.Authenticated when action in [:create, :update, :delete]
 
   def index(conn, _params) do
     query = from s in Sport,
+    preload: [:user],
+    join: u in User, on: s.user_id == u.id,
     order_by: [asc: s.name]
+
     sports = Repo.all(query)
+
     render(conn, "index.json", sports: sports)
   end
 
   def search(conn, %{"term" => term} = params) do
     normalized_term =  "%" <> Normalize.normalize(term) <> "%"
     query = from s in Sport,
+    preload: [:user],
+    join: u in User, on: s.user_id == u.id,
     where: ilike(s.name_system, ^normalized_term),
     order_by: [asc: s.name]
 
@@ -69,4 +76,8 @@ defmodule SportScore.SportController do
 
     send_resp(conn, :no_content, "")
   end
+
+
+
+  #######################PRIVATE###############################
 end

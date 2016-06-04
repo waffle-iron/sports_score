@@ -9,9 +9,12 @@ defmodule SportScore.SportView do
     %{data: render_one(sport, SportScore.SportView, "sport.json")}
   end
 
-  def render("sport.json", %{sport: sport}) do
-    %{id: sport.id,
-      name: sport.name,    
-      user_id: sport.user_id}
+  def render("sport.json", %{sport: sport}) do  
+    %{
+      id: sport.id,
+      name: sport.name,
+      user_id: sport.user.id,
+      user: render_one(sport.user, SportScore.UserView, "user.json")
+    }
   end
 end
