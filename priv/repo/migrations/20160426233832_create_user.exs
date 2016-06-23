@@ -3,14 +3,25 @@ defmodule SportScore.Repo.Migrations.CreateUser do
 
   def change do
     create table(:users) do
-      add :username, :string, null: false
-      add :email, :string, null: false
-      add :encrypted_password, :string, null: false
+      add :email, :string
+      add :username, :string
+      add :password_hash, :string
+      add :role, :string
+      add :confirmed_at, :datetime
+      add :confirmation_token, :string
+      add :confirmation_sent_at, :datetime
+      add :reset_token, :string
+      add :reset_sent_at, :datetime
+      add :bio, :string
+      add :otp_required, :boolean
+      add :otp_secret, :string
+      add :status, :string, default: "AWAITING_CONFIRMATION"
 
       timestamps
     end
 
-    create unique_index(:users, [:username])
-    create unique_index(:users, [:email])
+    create unique_index :users, [:email]
+    create unique_index :users, [:username]
+    create index, :users, [:status]
   end
 end

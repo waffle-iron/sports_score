@@ -1,34 +1,51 @@
 defmodule SportScore.User do
   use SportScore.Web, :model
 
+  alias Openmaize.DB
+
+  # IMPORTANT
+  # only add `confirmed_at` to your schema if you are using email confirmation
   schema "users" do
-    field :name, :string
     field :email, :string
-    field :encrypted_password, :string
-    field :is_admin, :boolean, default: false
+    field :username, :string
+    field :role, :string
+    field :password, :string, virtual: true
+    field :password_hash, :string
+    field :confirmed_at, Ecto.DateTime
+    field :confirmation_token, :string
+    field :confirmation_sent_at, Ecto.DateTime
+    field :reset_token, :string
+    field :reset_sent_at, Ecto.DateTime
+    field :bio, :string
+    field :otp_required, :boolean
+    field :otp_secret, :string
 
     timestamps
   end
 
+  @doc """
+  Creates a changeset based on the `model` and `params`.
+  If `params` are nil, an invalid changeset is returned
+  with no validation performed.
+  """
   def changeset(model, params \\ :empty) do
-  	model
-  	|> cast(params, ~w(name email encrypted_password), [])
-  	|> validate_length(:name, min: 3)
-    |> unique_constraint(:name,  message: "This name is already being used")
-    |> unique_constraint(:email,  message: "This enail is already being used")
+    model
+    |> cast(params, ~w(email role), ~w(username bio))
+    |> validate_length(:username, min: 1, max: 100)
+    |> unique_constraint(:email, message: "This email is already in use")
+    |> unique_constraint(:username, message: "This username is already in use")
   end
 
-  def validate({:ok, _}, user_params) do
-    changeset = changeset(%SportScore.User{}, user_params)
-    if changeset.valid? do
-      {:ok, []}
-    else
-      {:error, changeset.errors}
-    end
+  def auth_changeset(model, params, key) do
+    model
+    |> changeset(params)
+    |> DB.add_password_hash(params)
+    |> DB.add_confirm_token(key)
   end
 
-   def validate({:error, errors}, user_params) do
-     IO.puts "I could do something fancy here. But I won't."
-     {:error, errors}
-   end
+  def reset_changeset(model, params, key) do
+    model
+    |> cast(params, ~w(email), [])
+    |> DB.add_reset_token(key)
+  end
 end
