@@ -18,8 +18,16 @@ defmodule SportScore.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {SportScore, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+     applications: [
+        :phoenix,
+        :phoenix_html,
+        :cowboy,
+        :logger,
+        :gettext,
+        :phoenix_ecto,
+        :postgrex,
+        :openmaize]
+      ]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,7 +45,9 @@ defmodule SportScore.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
-     {:addict, "~> 0.2"}]
+     {:openmaize, "~> 0.19"},
+     {:mailgun, "~> 0.1"},
+     {:not_qwerty123, "~> 1.1"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
