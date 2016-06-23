@@ -28,12 +28,18 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
 
-config :addict,
-  secret_key:  System.get_env("ADDICT_KEY"),
-  extra_validation: fn ({valid, errors}, user_params) -> {valid, errors} end, # define extra validation here
-  user_schema: SportScore.User,
-  repo: SportScore.Repo,
-  from_email: System.get_env("SPORTSCOREFROM"),
-  mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
-  mailgun_key: System.get_env("MAILGUN_KEY"),
-  mail_service: :mailgun
+  # Openmaize authentication library configuration
+  # For more information about configuration, see the documentation
+  # for the Openmaize.Config module.
+  config :openmaize,
+    user_model: SportScore.User,
+    repo: SportScore.Repo
+
+  # OpenmaizeJWT configuration
+  config :openmaize_jwt,
+    token_data: %{}
+
+  # Configure mailgun
+  config :sport_score,
+    mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
+    mailgun_key:    System.get_env("MAILGUN_KEY")
