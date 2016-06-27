@@ -35,10 +35,6 @@ config :phoenix, :generators,
     user_model: SportScore.User,
     repo: SportScore.Repo
 
-  # OpenmaizeJWT configuration
-  config :openmaize_jwt,
-    token_data: %{}
-
   # Configure mailgun
   config :sport_score,
     mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
