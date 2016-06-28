@@ -29,6 +29,7 @@ defmodule SportScore.Router do
     get "/twofa", PageController, :twofa
     post "/twofa", PageController, :login_twofa
     delete "/logout", PageController, :logout, as: :logout
+    post "/register", PageController, :register
   end
 
   scope "/api", SportScore do
