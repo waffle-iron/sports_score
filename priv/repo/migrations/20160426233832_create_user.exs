@@ -20,7 +20,6 @@ defmodule SportScore.Repo.Migrations.CreateUser do
     end
 
     create unique_index :users, [:email]
-    create unique_index :users, [:username]
-    create index, :users, [:status]
+    create unique_index :users, [:username]  
   end
 end
