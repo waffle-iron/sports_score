@@ -2,6 +2,7 @@ defmodule SportScore.PageController do
   use SportScore.Web, :controller
 
   import SportScore.{Authorize, Confirm}
+  alias Openmaize.ConfirmEmail
   alias Openmaize.Login.Name
   alias SportScore.{Mailer, User}
 
@@ -65,5 +66,20 @@ defmodule SportScore.PageController do
 
   def reset_password(conn, params) do
     handle_reset conn, params
+  end
+
+  def register(conn, %{"user_params" => user_params}) do
+    {key, link} = ConfirmEmail.gen_token_link(Map.get(user_params, "email"))
+    changeset = User.auth_changeset(%User{}, user_params, key)
+
+    case Repo.insert(changeset) do
+      {:ok, user} ->
+        Mailer.ask_confirm(Map.get(user_params, "email"), link)
+        conn
+        |> put_flash(:info, "User created successfully.")
+        render(conn, "user.json", user: user)
+      {:error, changeset} ->    
+        render(conn, "changesetErrors.json", errors: changeset.errors)
+    end
   end
 end
