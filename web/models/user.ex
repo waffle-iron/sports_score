@@ -30,7 +30,7 @@ defmodule SportScore.User do
   """
   def changeset(model, params \\ :empty) do
     model
-    |> cast(params, ~w(email role), ~w(username bio))
+    |> cast(params, ~w(email), ~w(username bio role))
     |> validate_length(:username, min: 1, max: 100)
     |> unique_constraint(:email, message: "This email is already in use")
     |> unique_constraint(:username, message: "This username is already in use")
