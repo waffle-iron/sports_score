@@ -77,9 +77,9 @@ defmodule SportScore.PageController do
         Mailer.ask_confirm(Map.get(user_params, "email"), link)
         conn
         |> put_flash(:info, "User created successfully.")
-        render(conn, "user.json", user: user)
-      {:error, changeset} ->    
-        render(conn, "changesetErrors.json", errors: changeset.errors)
+        render(conn, SportScore.UserView, "newUser.json", user: user)
+      {:error, changeset} ->
+        render(conn, SportScore.ErrorView, "changesetErrors.json", errors: changeset.errors)
     end
   end
 end

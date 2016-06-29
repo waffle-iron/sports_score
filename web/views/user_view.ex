@@ -14,4 +14,15 @@ defmodule SportScore.UserView do
       name: user.name
     }
   end
+
+  def render("newUser.json", %{user: user}) do
+    %{
+      success: true,
+      message: "The user has been created. An email has been sent to confirm your address!",
+      data: %{
+        username: user.username,
+        email: user.email
+      }
+    }
+  end
 end
