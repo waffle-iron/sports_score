@@ -18,9 +18,11 @@ var router = new VueRouter({
 
 
 //The components
-var About 	=  	require(BaseComponentPath + "general/about.vue")
-var Home 	=	require( BaseComponentPath + "general/home.vue")
-var Sports = require(BaseComponentPath + "sports/home.vue")
+var About 	    =  	require(BaseComponentPath + "general/about.vue")
+var Login 	    =  	require(BaseComponentPath + "general/login.vue")
+var Register 	  =  	require(BaseComponentPath + "general/register.vue")
+var Home 	      =	require( BaseComponentPath + "general/home.vue")
+var Sports      = require(BaseComponentPath + "sports/home.vue")
 
 
 
@@ -43,6 +45,12 @@ router.map({
 	},
   '/about': {
       component: About
+  },
+  '/login':{
+    component: Login
+  },
+  '/register':{
+    component: Register
   },
   '/sports':{
       component : Sports,
