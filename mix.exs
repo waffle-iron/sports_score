@@ -26,7 +26,8 @@ defmodule SportScore.Mixfile do
         :gettext,
         :phoenix_ecto,
         :postgrex,
-        :openmaize]
+        :openmaize,
+        :openmaize_jwt]
       ]
   end
 
@@ -45,6 +46,7 @@ defmodule SportScore.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
+     {:openmaize_jwt, "~> 0.11"},
      {:openmaize, "~> 0.19"},
      {:mailgun, "~> 0.1"},
      {:not_qwerty123, "~> 1.1"}]
