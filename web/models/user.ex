@@ -38,6 +38,7 @@ defmodule SportScore.User do
 
   def auth_changeset(model, params, key) do
     model
+    |> set_role
     |> changeset(params)
     |> DB.add_password_hash(params)
     |> DB.add_confirm_token(key)
@@ -47,5 +48,9 @@ defmodule SportScore.User do
     model
     |> cast(params, ~w(email), [])
     |> DB.add_reset_token(key)
+  end
+
+  def set_role(changeset, role \\ "user") do
+    Map.put(changeset, :role, role)
   end
 end
