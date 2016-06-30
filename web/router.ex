@@ -18,13 +18,13 @@ defmodule SportScore.Router do
   scope "/", SportScore do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", PageController, :index, as: :home
     get "/confirm", PageController, :confirm
-    get "/askreset", PageController, :askreset
+    #get "/askreset", PageController, :askreset
     post "/askreset", PageController, :askreset_password
-    get "/reset", PageController, :reset
+    #get "/reset", PageController, :reset
     post "/reset", PageController, :reset_password
-    get "/login", PageController, :login, as: :login
+    #get "/login", PageController, :login, as: :login
     post "/login", PageController, :login_user, as: :login
     get "/twofa", PageController, :twofa
     post "/twofa", PageController, :login_twofa
