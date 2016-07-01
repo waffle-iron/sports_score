@@ -5,7 +5,7 @@ defmodule SportScore.Authorize do
   import SportScore.Router.Helpers
   alias SportScore.{Repo, User}
 
-  @redirects %{"admin" => "/admin", "user" => "/users", nil => "/"}
+  @redirects %{"admin" => "/admin", "user" => "/", nil => "/"}
 
   @doc """
   Custom action that can be used to override the `action` function in any
@@ -67,9 +67,9 @@ defmodule SportScore.Authorize do
   """
   def unauthenticated(conn, message \\ "You need to log in to view this page") do
     conn
-    |> put_flash(:error, message)
-    |> redirect(to: login_path(conn, :login))
     |> halt
+
+    render(conn, SportScore.ErrorView, "changesetErrors.json", errors: [{:login, message}])
   end
 
   @doc """

@@ -25,4 +25,12 @@ defmodule SportScore.UserView do
       }
     }
   end
+
+  def render("loggedIn.json", %{user: user}) do
+    %{
+      success: true,
+      message: "Congratulations, your are logged in",
+      data: %{}
+    }
+  end
 end
