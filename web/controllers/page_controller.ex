@@ -11,8 +11,8 @@ defmodule SportScore.PageController do
   plug Openmaize.ResetPassword, [key_expires_after: 30,
     mail_function: &Mailer.receipt_confirm/1] when action in [:reset_password]
 
-  #plug Openmaize.Login, [unique_id: :email] when action in [:login_user]
-  plug Openmaize.Login, [unique_id: &Name.email_username/1, override_exp: 10_080]
+  plug Openmaize.Login, [unique_id: :email] when action in [:login_user]
+  #plug Openmaize.Login, [unique_id: &Name.email_username/1, override_exp: 10_080]
   when action in [:login_user]
   plug Openmaize.OnetimePass when action in [:login_twofa]
   plug Openmaize.Logout when action in [:logout]
@@ -27,6 +27,8 @@ defmodule SportScore.PageController do
 
   def login_user(conn, params) do
     handle_login conn, params
+
+    render(conn, SportScore.UserView, "loggedIn.json", user: Map.get(conn, :current_user))
   end
 
   def login_twofa(conn, params) do
