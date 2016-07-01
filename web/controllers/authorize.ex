@@ -153,7 +153,7 @@ defmodule SportScore.Authorize do
   def handle_login(%Plug.Conn{private: %{openmaize_user: %{role: role}}} = conn, _params) do
     conn
     |> put_flash(:info, "You have been logged in")
-    |> redirect(to: @redirects[role])
+    |> halt
   end
 
   @doc """

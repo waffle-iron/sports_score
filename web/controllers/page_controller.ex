@@ -26,9 +26,9 @@ defmodule SportScore.PageController do
   end
 
   def login_user(conn, params) do
-    handle_login conn, params
+    connec = handle_login conn, params
 
-    render(conn, SportScore.UserView, "loggedIn.json", user: Map.get(conn, :current_user))
+    render(connec, SportScore.UserView, "loggedIn.json", user: Map.get(connec, :current_user))
   end
 
   def login_twofa(conn, params) do
