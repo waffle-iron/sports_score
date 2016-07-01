@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Hello SportScore!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  <title>Hello SportScore!</title>
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
 
 </head>
 
 <body id="sportscore">
-    <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a v-link="{ path: '/' }" class="navbar-brand">SportScore</a>
-            </div>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+        data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a v-link="{ path: '/' }" class="navbar-brand">SportScore</a>
+    </div>
 
-            <% current_user =  nil %>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li v-link="{ path: '/upcoming' }" class="btn">
-                        <a>Upcoming Events</a>
-                    </li>
-                    <%= if current_user  do %>
-                      <li v-link="{ path: '/myevents'}" class="btn">
-                          <a >My Events</a>
-                      </li>
-                    <% end %>
-                      <li v-link="{ path: '/sports'}" class="btn">
-                          <a >Sports</a>
-                      </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="container-fluid">
-            <p class="alert alert-info alert-dismissible" role="alert"><%= get_flash(@conn, :info) %></p>
-            <p class="alert alert-danger alert-dismissible" role="alert"><%= get_flash(@conn, :error) %></p>
+    <% current_user =  nil %>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li v-link="{ path: '/upcoming' }" class="btn">
+          <a>Upcoming Events</a>
+        </li>
+        <%= if current_user  do %>
+        <li v-link="{ path: '/myevents'}" class="btn">
+          <a >My Events</a>
+        </li>
+        <% end %>
+        <li v-link="{ path: '/sports'}" class="btn">
+          <a >Sports</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <%= if @current_user do %>
+        <li><a href="<%= #user_path(@conn, :show, @current_user[:id]) %>"><%= user_name @current_user %></a></li>
+        <li><%= link "Logout", to: logout_path(@conn, :logout), method: :delete %></li>
+        <%= else %>
+        <li v-link="{ path: '/login'}" class="btn">
+          <a >Login</a>
+        </li>
+      <%= end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <p class="alert alert-info alert-dismissible" role="alert"><%= get_flash(@conn, :info) %></p>
+  <p class="alert alert-danger alert-dismissible" role="alert"><%= get_flash(@conn, :error) %></p>
 
-            <main role="main">
-                <router-view keep-alive></router-view>
-            </main>
-        </div > <!-- /container --><!-- /container -->
+  <main role="main">
+    <router-view keep-alive></router-view>
+  </main>
+</div > <!-- /container --><!-- /container -->
 
 
 <script>window.userToken = "<%= get_csrf_token %>"</script>
