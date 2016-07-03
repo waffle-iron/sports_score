@@ -1,6 +1,7 @@
 # SportsScore
 
 [![Build Status](https://semaphoreci.com/api/v1/kevanatole/sports_score/branches/master/badge.svg)](https://semaphoreci.com/kevanatole/sports_score)
+[![Coverage Status](https://coveralls.io/repos/github/kevin-DL/sports_score/badge.svg?branch=master)](https://coveralls.io/github/kevin-DL/sports_score?branch=master)
 
 ## Goal
 
