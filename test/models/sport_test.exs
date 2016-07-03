@@ -3,12 +3,15 @@ defmodule SportScore.SportTest do
 
   alias SportScore.Sport
   alias SportScore.User
+  alias Openmaize.ConfirmEmail
 
   @valid_attrs %{name: "some content", name_system: "some content", user_id: 1}
+  @email "kev@gmil.com"
   @invalid_attrs %{}
 
   setup do
-    userChangeset = User.changeset(%User{}, %{email: "kev@gmil.com", name: "Kevin", encrypted_password: "dsfsdd89afhndsiafnads8csd9"})
+    {key, link} = ConfirmEmail.gen_token_link(@email)
+    userChangeset = User.auth_changeset(%User{}, %{email: @email, username: "Kevin", password: "averitole972!"},  key)
     {:ok, user}  = Repo.insert(userChangeset)
 
     {:ok, data: user}
@@ -32,7 +35,6 @@ defmodule SportScore.SportTest do
     {:error, secondSport} = Repo.insert(changeset2)
 
     sports = Repo.all(Sport)
-    IO.inspect sports
     assert(length(sports)  == 1)
   end
 end
