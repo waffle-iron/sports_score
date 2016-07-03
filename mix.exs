@@ -2,15 +2,19 @@ defmodule SportScore.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :sport_score,
-     version: "0.0.1",
-     elixir: "~> 1.0",
-     elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [:phoenix, :gettext] ++ Mix.compilers,
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+    [
+      app: :sport_score,
+      version: "0.0.1",
+      elixir: "~> 1.0",
+      elixirc_paths: elixirc_paths(Mix.env),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers,
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      aliases: aliases,
+      deps: deps,
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test]
+   ]
   end
 
   # Configuration for the OTP application.
@@ -49,7 +53,9 @@ defmodule SportScore.Mixfile do
      {:openmaize_jwt, "~> 0.11"},
      {:openmaize, "~> 0.19"},
      {:mailgun, "~> 0.1"},
-     {:not_qwerty123, "~> 1.1"}]
+     {:not_qwerty123, "~> 1.1"},
+     {:excoveralls, "~> 0.5", only: :test}
+   ]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
