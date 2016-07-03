@@ -31,9 +31,7 @@ var Confirm     = require(BaseComponentPath + "general/confirm.vue")
 
 
 //Sports
-var SportsList = require(BaseComponentPath + "sports/list.vue")
-var SportsNew = require(BaseComponentPath + "sports/new.vue")
-var SportsShow = require(BaseComponentPath + "sports/show.vue")
+
 
 
 
@@ -64,21 +62,6 @@ router.map({
   },
   '/confirm':{
     component: Confirm
-  },
-  '/sports':{
-      component : Sports,
-      subRoutes: {
-        '/': {
-          component: SportsList
-        },
-        '/new': {
-          component: SportsNew
-        },
-        '/:id': {
-          name: 'sport',
-          component : SportsShow
-        }
-    }
   }
 })
 
