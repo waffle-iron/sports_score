@@ -4,12 +4,7 @@
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" v-model="email" placeholder="Email">
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" v-model="password" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-default" @click="login()">Login</button>
-    <a v-link="{ path: '/ask_reset' }">Forgot Password</a>
+    <button type="submit" class="btn btn-default" @click="reset()">Reset Password</button>
   </form>
 </template>
 
@@ -17,26 +12,24 @@
 export default {
   data: function () {
     return {
-      email : '',
-      password: ''
+      email: ''
     }
   },
   computed: {},
   ready: function () {},
   attached: function () {},
   methods: {
-    login: function(){
+    reset: function()
+    {
+      var user = {}
+      user.email = this.email
 
-      var credentials = {}
-      credentials.email = this.email
-      credentials.password = this.password
-
-      this.$http.post('/login', {user: credentials}, {headers: {'x-csrf-token': window.userToken}}).then(function(response){
+      this.$http.post('/askreset', {user: user}, {headers: {'x-csrf-token': window.userToken}}).then(function(response){
         var returnValue = response.data
         if(returnValue.success == true)
         {
           alertify.success(returnValue.message);
-          window.location.href = "/"
+          this.email = '';
         }
         else
         {
@@ -45,7 +38,7 @@ export default {
           });
         }
       }, function(error){
-        alertify.error('An error occured during the registration please try again later')
+        alertify.error('An error occured during the reset process please try again later')
       })
     }
   },

@@ -13,23 +13,23 @@ defmodule SportScore.Mailer do
   @doc """
   An email with a confirmation link in it.
   """
-  def ask_confirm(email, link) do
-    confirm_url = "http://localhost:4000/confirm?#{link}"
+  def ask_confirm(email, key) do
+    confirm_url = "http://localhost:4000/#!/confirm"
     send_email to: email,
               from: @from,
               subject: "Request confirmation",
-              html: Phoenix.View.render_to_string(SportScore.EmailView, "ask_confirm.html", %{confirm_url: confirm_url})
+              html: Phoenix.View.render_to_string(SportScore.EmailView, "ask_confirm.html", %{confirm_url: confirm_url, key: key})
   end
 
   @doc """
   An email with a link to reset the password.
   """
-  def ask_reset(email, link) do
-    confirm_url = "http://www.example.com/reset?#{link}"
+  def ask_reset(email, key) do
+    confirm_url = "http://localhost:4000/#!/reset_password"
     send_email to: email,
     from: @from,
     subject: "Reset password",
-    html: Phoenix.View.render_to_string(SportScore.EmailView, "ask_reset.html", %{confirm_url: confirm_url})
+    html: Phoenix.View.render_to_string(SportScore.EmailView, "ask_reset.html", %{confirm_url: confirm_url, key: key})
   end
 
   @doc """

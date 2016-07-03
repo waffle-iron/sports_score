@@ -21,7 +21,10 @@ defmodule SportScore.Confirm do
     unauthenticated conn, message
   end
   def handle_confirm(%Plug.Conn{private: %{openmaize_info: message}} = conn, _params) do
-    conn |> put_flash(:info, message) |> redirect(to: "/")
+    conn
+    |> halt
+
+    render(conn, SportScore.PageView, "success.json", message: message)    
   end
 
   @doc """

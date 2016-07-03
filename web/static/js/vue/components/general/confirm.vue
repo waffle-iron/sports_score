@@ -1,15 +1,14 @@
 <template lang="html">
-  <form onsubmit="return false;">
+  <form @submit="confirm(); return false;">
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" v-model="email" placeholder="Email">
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" v-model="password" placeholder="Password">
+      <label for="key">Key</label>
+      <input type="text" class="form-control" id="key" v-model="key" placeholder="dsdvsddfvr4333t34m">
     </div>
-    <button type="submit" class="btn btn-default" @click="login()">Login</button>
-    <a v-link="{ path: '/ask_reset' }">Forgot Password</a>
+    <button type="submit" class="btn btn-default">Confirm Email</button>
   </form>
 </template>
 
@@ -18,25 +17,20 @@ export default {
   data: function () {
     return {
       email : '',
-      password: ''
+      key: ''
     }
   },
   computed: {},
   ready: function () {},
   attached: function () {},
   methods: {
-    login: function(){
-
-      var credentials = {}
-      credentials.email = this.email
-      credentials.password = this.password
-
-      this.$http.post('/login', {user: credentials}, {headers: {'x-csrf-token': window.userToken}}).then(function(response){
+    confirm: function(){
+      this.$http.post('/confirm', {email: this.email, key: this.key}).then(function(response){
         var returnValue = response.data
         if(returnValue.success == true)
         {
           alertify.success(returnValue.message);
-          window.location.href = "/"
+          this.clear()
         }
         else
         {
@@ -45,8 +39,13 @@ export default {
           });
         }
       }, function(error){
-        alertify.error('An error occured during the registration please try again later')
+        alertify.error('An error occured during the confirmation please try again later')
       })
+    },
+
+    clear: function(){
+      this.email = ''
+      this.key = ''
     }
   },
   components: {}

@@ -2,9 +2,10 @@ var Vue = require('vue')
 var VueRouter = require('vue-router')
 var BaseComponentPath = "./vue/components/";
 
+
 Vue.use(VueRouter)
 Vue.use(require('vue-resource'))
-
+Vue.http.headers.common['x-csrf-token'] = window.userToken;
 var App = Vue.extend({
 })
 
@@ -23,6 +24,9 @@ var Login 	    =  	require(BaseComponentPath + "general/login.vue")
 var Register 	  =  	require(BaseComponentPath + "general/register.vue")
 var Home 	      =	require( BaseComponentPath + "general/home.vue")
 var Sports      = require(BaseComponentPath + "sports/home.vue")
+var AskReset    = require(BaseComponentPath + "general/ask_reset.vue")
+var Reset       = require(BaseComponentPath + "general/reset.vue")
+var Confirm     = require(BaseComponentPath + "general/confirm.vue")
 
 
 
@@ -51,6 +55,15 @@ router.map({
   },
   '/register':{
     component: Register
+  },
+  '/ask_reset':{
+    component: AskReset
+  },
+  '/reset_password':{
+    component: Reset
+  },
+  '/confirm':{
+    component: Confirm
   },
   '/sports':{
       component : Sports,

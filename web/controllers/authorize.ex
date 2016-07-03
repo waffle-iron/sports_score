@@ -69,7 +69,7 @@ defmodule SportScore.Authorize do
     conn
     |> halt
 
-    render(conn, SportScore.ErrorView, "changesetErrors.json", errors: [{:login, message}])
+    render(conn, SportScore.ErrorView, "changesetErrors.json", errors: [{:authentication, message}])
   end
 
   @doc """
@@ -80,9 +80,9 @@ defmodule SportScore.Authorize do
   """
   def unauthorized(conn, current_user, message \\ "You are not authorized to view this page") do
     conn
-    |> put_flash(:error, message)
-    |> redirect(to: @redirects[current_user.role])
     |> halt
+
+    render(conn, SportScore.ErrorView, "changesetErrors.json", errors: [{:authorization, message}])
   end
 
   @doc """
@@ -154,7 +154,7 @@ defmodule SportScore.Authorize do
     conn
     |> halt
 
-    render(conn, SportScore.UserView, "loggedIn.json", user: Map.get(conn, :current_user))  
+    render(conn, SportScore.UserView, "loggedIn.json", user: Map.get(conn, :current_user))
   end
 
   @doc """

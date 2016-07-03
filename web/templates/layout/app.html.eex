@@ -46,8 +46,9 @@
         <li><a href="<%= #user_path(@conn, :show, @current_user[:id]) %>"><%= user_name @current_user %></a></li>
         <li><%= link "Logout", to: logout_path(@conn, :logout), method: :delete %></li>
         <%= else %>
-        <li v-link="{ path: '/login'}" class="btn">
-          <a >Login</a>
+        <li >
+          <a v-link="{ path: '/login'}">Login</a> /
+          <a v-link="{ path: '/register' }">Register</a>
         </li>
       <%= end %>
       </ul>

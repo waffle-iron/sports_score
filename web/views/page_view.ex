@@ -8,4 +8,13 @@ defmodule SportScore.PageView do
       %{id: user.id}
     end
   end
+
+  def render("success.json", %{message: message}) do
+    %{
+      success: true,
+      message: message,
+      data: %{}
+    }
+  end
+  
 end
