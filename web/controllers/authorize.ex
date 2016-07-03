@@ -152,8 +152,9 @@ defmodule SportScore.Authorize do
   end
   def handle_login(%Plug.Conn{private: %{openmaize_user: %{role: role}}} = conn, _params) do
     conn
-    |> put_flash(:info, "You have been logged in")
     |> halt
+
+    render(conn, SportScore.UserView, "loggedIn.json", user: Map.get(conn, :current_user))  
   end
 
   @doc """

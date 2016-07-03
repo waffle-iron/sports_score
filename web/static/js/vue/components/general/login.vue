@@ -1,5 +1,5 @@
 <template lang="html">
-  <form>
+  <form onsubmit="return false;">
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" v-model="email" placeholder="Email">
@@ -36,7 +36,7 @@ export default {
         if(returnValue.success == true)
         {
           alertify.success(returnValue.message);
-          this.$router.go("/")
+          window.location.href = "/"
         }
         else
         {
