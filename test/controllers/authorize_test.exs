@@ -32,43 +32,37 @@ defmodule SportScore.AuthorizeTest do
 
   @tag :pending
   test "authorization for nil user fails" do
-    conn = conn() |> get("/users")
-    assert redirected_to(conn) == "/login"
+
   end
 
   # Test routes protected by the id_check plug
   @tag :pending
   test "id check succeeds", %{conn: conn} do
-    conn = get conn, "/users/3"
-    assert html_response(conn, 200)
+
   end
 
   @tag :pending
   test "id check fails for incorrect id", %{conn: conn} do
-    conn = get conn, "/users/30"
-    assert redirected_to(conn) == "/users"
+
   end
 
   @tag :pending
   test "id check fails for nil user" do
-    conn = conn() |> get("/users/3")
-    assert redirected_to(conn) == "/login"
+
   end
 
   @tag :pending
   test "login succeeds" do
     # Remove the Repo.get_by line if you are not using email confirmation
-    Repo.get_by(User, %{email: "tony@mail.com"}) |> user_confirmed
-    conn = post conn, "/login", user: @valid_attrs
-    assert redirected_to(conn) == "/users"
+    #Repo.get_by(User, %{email: "tony@mail.com"}) |> user_confirmed
+
   end
 
   @tag :pending
   test "login fails" do
     # Remove the Repo.get_by line if you are not using email confirmation
-    Repo.get_by(User, %{email: "reg@mail.com"}) |> user_confirmed
-    conn = post conn, "/login", user: @invalid_attrs
-    assert redirected_to(conn) == "/login"
+    #Repo.get_by(User, %{email: "reg@mail.com"}) |> user_confirmed
+
   end
 
   @tag :pending
