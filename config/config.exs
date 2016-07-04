@@ -7,7 +7,7 @@ use Mix.Config
 
 # Configures the endpoint
 config :sport_score, SportScore.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "localhost", scheme: "http"],
   root: Path.dirname(__DIR__),
   secret_key_base: "cmYw0f0wRzbFJ7OR22UPOomK69kSrQGxPjLLsiM/mbdc3wanRVQX9OndMB9zPLsR",
   render_errors: [accepts: ~w(html json)],
@@ -38,4 +38,5 @@ config :phoenix, :generators,
   # Configure mailgun
   config :sport_score,
     mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
-    mailgun_key:    System.get_env("MAILGUN_KEY")
+    mailgun_key:    System.get_env("MAILGUN_KEY"),
+    mailgun_from: System.get_env("SPORTSCOREFROM")
