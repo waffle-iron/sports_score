@@ -13,7 +13,12 @@ config :logger, level: :warn
 config :sport_score, SportScore.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: System.get_env("DATABASE_POSTGRESQL_USERNAME") || "mackbook",
-  password: System.get_env("DATABASE_POSTGRESQL_PASSWORD") || "",  
+  password: System.get_env("DATABASE_POSTGRESQL_PASSWORD") || "",
   database: "sport_score_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+
+  config :sport_score,
+    mailgun_domain: "",
+    mailgun_key:    ""
