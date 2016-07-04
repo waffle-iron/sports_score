@@ -17,8 +17,3 @@ config :sport_score, SportScore.Repo,
   database: "sport_score_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
-
-
-  config :sport_score,
-    mailgun_domain: "",
-    mailgun_key:    ""
