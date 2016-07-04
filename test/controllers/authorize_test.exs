@@ -64,8 +64,7 @@ defmodule SportScore.AuthorizeTest do
     #Repo.get_by(User, %{email: "reg@mail.com"}) |> user_confirmed
 
   end
-
-  @tag :pending
+  
   test "logout succeeds" do
   {:ok, user_token} = %{id: 3, email: "tony@mail.com", role: "user"}
                       |> generate_token({0, 1440})
