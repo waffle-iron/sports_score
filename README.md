@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/kevin-DL/sports_score.png?label=ready&title=Ready)](https://waffle.io/kevin-DL/sports_score)
 # SportsScore
 
 [![Build Status](https://semaphoreci.com/api/v1/kevanatole/sports_score/branches/master/badge.svg)](https://semaphoreci.com/kevanatole/sports_score)
