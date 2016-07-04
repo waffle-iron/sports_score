@@ -1,5 +1,5 @@
 <template lang="html">
-  <form @submit="register(); return false;">
+  <form @submit="register();">
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" class="form-control" id="username" v-model="username" placeholder="jojo">
@@ -56,6 +56,7 @@ export default {
             alertify.error(val)
           });
         }
+        return false;
       }, function(error){
         alertify.error('An error occured during the registration please try again later')
       })

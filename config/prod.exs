@@ -28,6 +28,10 @@ config :sport_score, SportScore.Repo,
   pool_size: 20,
   ssl: true
 
+config :sport_score,
+  mailgun_domain: System.get_env("MAILGUN_DOMAIN"),
+  mailgun_key:    System.get_env("MAILGUN_KEY")
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
