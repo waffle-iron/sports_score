@@ -8,13 +8,14 @@ defmodule SportScore.Mailer do
   use Mailgun.Client, domain: Application.get_env(:sport_score, :mailgun_domain),
                       key:    Application.get_env(:sport_score, :mailgun_key)
 
-  @from "contact@sportscore.totole.xyz"
-
+  @from Application.get_env(:sport_score, :mailgun_from)
+  @url_parts Application.get_env(:sport_score, SportScore.Endpoint)
+  @base "#{@url_parts[:url][:scheme]}://#{@url_parts[:url][:host]}:#{@url_parts[:http][:port]}/"
   @doc """
   An email with a confirmation link in it.
   """
   def ask_confirm(email, key) do
-    confirm_url = "http://localhost:4000/#!/confirm"
+    confirm_url = @base  <> "#!/confirm"
     send_email to: email,
               from: @from,
               subject: "Request confirmation",
@@ -25,7 +26,7 @@ defmodule SportScore.Mailer do
   An email with a link to reset the password.
   """
   def ask_reset(email, key) do
-    confirm_url = "http://localhost:4000/#!/reset_password"
+    confirm_url = @base <> "#!/reset_password"
     send_email to: email,
     from: @from,
     subject: "Reset password",
