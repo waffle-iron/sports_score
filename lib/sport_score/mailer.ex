@@ -10,7 +10,7 @@ defmodule SportScore.Mailer do
 
   @from Application.get_env(:sport_score, :mailgun_from)
   @url_parts Application.get_env(:sport_score, SportScore.Endpoint)
-  @base "#{@url_parts[:url][:scheme]}://#{@url_parts[:url][:host]}:#{@url_parts[:http][:port]}/"
+  @base "#{@url_parts[:url][:scheme]}://#{@url_parts[:url][:host]}:#{@url_parts[:url][:port]}/"
   @doc """
   An email with a confirmation link in it.
   """
